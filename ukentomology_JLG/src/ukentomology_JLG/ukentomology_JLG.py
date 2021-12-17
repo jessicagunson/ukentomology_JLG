@@ -37,7 +37,7 @@ def load_entData():
 
         Typical Usage Example
         --------------------------
-        load_ukentomology()
+        load_entData()
     """
     return pd.read_csv('data/ukentomology_data.csv', encoding='latin-1')
 
