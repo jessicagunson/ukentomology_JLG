@@ -14,7 +14,7 @@ def load_entData():
         Royal Albert Memorial Museum (RAMM). 
 
         Contains the following columns:
-        ------------------------------
+        -----------------------------------
         institution
             location of specimen; LMNH or RAMM
         id
@@ -35,7 +35,7 @@ def load_entData():
         
 
         Typical Usage Example
-        ---------------------
+        --------------------------
         load_ukentomology()
     """
     return pd.read_csv('data/ukentomology_data.csv', encoding='latin-1')
@@ -50,13 +50,13 @@ def entData_API(api_token):
 
 
         Parameters
-        ----------
+        -----------
         api_token: str
             a personal api token obtained for the RAMM API
 
         
         Contains the following columns:
-        ------------------------------
+        ----------------------------------
         institution
             location of specimen; LMNH or RAMM
         id
@@ -76,15 +76,15 @@ def entData_API(api_token):
     """
     #testing that LMNH API connection works
     for url in ['http://data.nhm.ac.uk/api/3']:
-    try:
-        response = requests.get(url)
-        response.raise_for_status()
-    except HTTPError as http_err:
-        print(f'HTTP error occurred: {http_err}')
-    except Exception as err: 
-        print(f'Other error occurred: {err}')
-    else:
-        print('LMNH Request was successful!')
+        try:
+            response = requests.get(url)
+            response.raise_for_status()
+        except HTTPError as http_err:
+            print(f'HTTP error occurred: {http_err}')
+        except Exception as err: 
+            print(f'Other error occurred: {err}')
+        else:
+            print('LMNH Request was successful!')
         
     api_token = 'api_token'
     #Get request for the LMNH collection 

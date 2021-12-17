@@ -1,6 +1,13 @@
 # ukentomology_JLG
 
-A package for identifying and locating entomological specimens at UK museums
+A package for identifying and locating entomological specimens at UK museums.
+This package has compiled entomology specimen collection data from the London
+Museum of Natural History and the Royal Albert Memorial Museum, specifically
+specimens of the Lepidoptera order. Users are able to load in a dataframe of 
+relevant information, as well as re-pull the information from the individual
+APIs if desired. The package also allows users to generate simple summary 
+statistics regarding the type and quantity of specimens available at the
+museum locations. 
 
 ## Installation
 
