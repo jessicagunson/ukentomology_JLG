@@ -40,7 +40,6 @@ def load_entData():
     """
     return pd.read_csv('data/ukentomology_data.csv', encoding='latin-1')
 
-
 def entData_API(api_token):
     """Code allowing the user to re-access the LMNH and RAMM museum database
         APIs
@@ -75,12 +74,23 @@ def entData_API(api_token):
         description
             notes regarding the specimen's collection, year collected, etc.
     """
+    #testing that LMNH API connection works
+    for url in ['http://data.nhm.ac.uk/api/3']:
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+    except HTTPError as http_err:
+        print(f'HTTP error occurred: {http_err}')
+    except Exception as err: 
+        print(f'Other error occurred: {err}')
+    else:
+        print('LMNH Request was successful!')
+        
     api_token = 'api_token'
     #Get request for the LMNH collection 
     lmnh_query = ('BMNH(E)+Lepidoptera')
     lmnh_params = {'resource_id':resources.specimens, 'q':lmnh_query} 
     lmnh_r = requests.get('http://data.nhm.ac.uk/api/3/action/datastore_search', params=lmnh_params)
-    lmnh_r.status_code
     lmnh_json = lmnh_r.json()
     #Parsing json and creating dataframe
     lmnh_df = pd.DataFrame(lmnh_json['result']['records'])
@@ -92,7 +102,7 @@ def entData_API(api_token):
                'category':'natural-sciences', 
                'per_page':250}
     ramm_r = requests.get('https://api.swcollectionsexplorer.org.uk/api/v1/objects/', params=ramm_params)
-    ramm_r.status_code
+    assert ramm_r.status_code == '200', "RAMM request failed, please confirm api_token and connection before trying again"
     #Parsing json and creating dataframe
     ramm_json = ramm_r.json()
     ramm_df = pd.DataFrame(ramm_json['data'])
@@ -109,7 +119,6 @@ def entData_API(api_token):
     frames = [lmnh_df3, ramm_df3]
     final_df = pd.concat(frames)
     return final_df
-
     
 def entData_basic():
     """A function providing the shape of the dataframe, rows and columns, as well as a simple plot
