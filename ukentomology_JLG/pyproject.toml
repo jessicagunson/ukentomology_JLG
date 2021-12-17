@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ukentomology_JLG"
-version = "0.1.0"
+version = "0.1.1"
 description = "A package for identifying and locating entomological specimens at UK museums"
 authors = ["Jessica L Gunson"]
 license = "MIT"
