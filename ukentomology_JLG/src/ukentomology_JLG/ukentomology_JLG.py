@@ -47,7 +47,9 @@ def entData_API(api_token):
 
         This function allows user to submit a get request to the LMNH and RAMM
         database APIs, and returns a cleaned and organized dataframe identical
-        to that provided with the oackage.
+        to that provided with the oackage. While the LMNH API does not require
+        a token, the RAMM API does. Tokens for the RAMM API may be obtained at
+        https://api.swcollectionsexplorer.org.uk.
 
 
         Parameters
