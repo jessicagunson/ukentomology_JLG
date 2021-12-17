@@ -1,3 +1,4 @@
+import os
 import requests
 from requests.exceptions import HTTPError
 import json
@@ -93,10 +94,10 @@ def entData_API(api_token):
     lmnh_r = requests.get('http://data.nhm.ac.uk/api/3/action/datastore_search', params=lmnh_params)
     lmnh_json = lmnh_r.json()
     #Parsing json and creating dataframe
+    lmnh_json = lmnh_r.json()
     lmnh_df = pd.DataFrame(lmnh_json['result']['records'])
-    lmnh_df2['institution']='LMNH'
-    lmnh_df3 = lmnh_df2.rename(columns={"_id": "id", "higherGeography":"countryOrigin", "year":"description"})
-    lmnh_df3 = lmnh_df3[['institution', 'id', 'order', 'family', 'genus', 'scientificName', 'countryOrigin', 'description']]
+    lmnh_df['institution']='LMNH'
+    lmnh_df2 = lmnh_df.rename(columns={"_id": "id", "higherGeography":"countryOrigin", "year":"description"})
     #Get request for the RAMM collection
     ramm_params = {'api_token':api_token, 
                'category':'natural-sciences', 
@@ -116,7 +117,7 @@ def entData_API(api_token):
     ramm_df3 = ramm_df2.rename(columns={"collection-country":"countryOrigin"})
     ramm_df3 = ramm_df3[['institution', 'id', 'order', 'family', 'genus', 'scientificName', 'countryOrigin', 'description']]
     #Concatenating dataframes
-    frames = [lmnh_df3, ramm_df3]
+    frames = [lmnh_df2, ramm_df3]
     final_df = pd.concat(frames)
     return final_df
     
